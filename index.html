@@ -120,11 +120,10 @@
         }
 
         .sidebar-footer {
-            padding: 15px;
-            font-size: 0.9rem;
+            padding: 5px;
+            font-size: 0.8rem;
             text-align: center;
             color: #aaa;
-            border-top: 1px solid #495057;
         }
 
         .sidebar-footer a {
@@ -169,7 +168,7 @@
                 </div>
             </div>
             <div class="sidebar-footer">
-                powered by <a href="https://lowcode.com" target="_blank">lowcode</a>
+                powered by <a href="https://github.com/lowcode-np" target="_blank">lowcode.</a>
             </div>
         </div>
 
@@ -193,14 +192,13 @@
             const iframe = document.getElementById('iframe-content');
             const title = document.querySelector('.menu-title');
 
-            // ตรวจสอบว่า iframe มี URL ตรงกับ URL ที่ต้องการเปลี่ยนหรือไม่
             if (iframe.src === url) {
-                return; // ไม่ทำอะไรถ้า URL ตรงกับ iframe ปัจจุบัน
+                return;
             }
 
-            iframe.src = url; // เปลี่ยน URL ของ iframe
+            iframe.src = url;
             if (menuTitle) {
-                title.textContent = menuTitle; // เปลี่ยนชื่อหัวข้อ
+                title.textContent = menuTitle;
             }
         }
     </script>
