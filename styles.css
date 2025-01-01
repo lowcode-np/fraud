@@ -74,7 +74,7 @@ body {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    : center;
+    align-items: center;
     color: #ccc;
     font-size: 0.9rem;
 }
