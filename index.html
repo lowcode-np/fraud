@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="icon" href="img/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -12,8 +13,8 @@
     <div class="container">
         <div class="sidebar">
             <div>
-                <div class="menu-header" style="margin-left: 15px;">
-                    <i class="fa-solid fa-layer-group" style="margin-right: 5px;"></i> Dashboards
+                <div class="menu-header" style="margin-bottom: 10px;">
+                    <i class="fa-solid fa-layer-group" style="margin-right: 10px;"></i>Dashboards
                 </div>
                 <div class="menu-item" onclick="toggleMenu('loss-menu')">
                     <span><i class="fas fa-chart-bar" style="margin-right: 5px;"></i> ยอดสูญหาย</span>
@@ -40,13 +41,17 @@
                 </div>
             </div>
             <div class="sidebar-footer">
-                powered by <a href="https://github.com/lowcode-np" target="_blank">lowcode.</a>
+                <img src="img/lowcode.svg" alt="powered by lowcode" style="height: 12px;">
             </div>
         </div>
 
         <div class="content">
             <div class="header">
-                <div class="menu-title">รายงานยอดสูญหาย</div>
+                <div class="menu-title"><i class="fas fa-chart-bar" style="margin-right: 6px;"></i>รายงานยอดสูญหาย</div>
+                <div class="logo-container">
+                    <div style="font-size: 0.5rem; color: #888;">powered by</div>
+                    <img src="img/google_sheets_logo.svg" alt="Google Sheets Logo" class="logo">
+                </div>                
             </div>
             <div class="iframe-container">
                 <iframe id="iframe-content" src="https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=1435556747"></iframe>
@@ -63,6 +68,7 @@
         function changeIframeSrc(url, menuTitle) {
             const iframe = document.getElementById('iframe-content');
             const title = document.querySelector('.menu-title');
+            const iframeContainer = document.querySelector('.iframe-container');
 
             if (iframe.src === url) {
                 return;
@@ -70,7 +76,25 @@
 
             iframe.src = url;
             if (menuTitle) {
-                title.textContent = menuTitle;
+                let icon = '';
+                if (['รายงานยอดสูญหาย', 'ตารางยอดสูญหาย', 'รายละเอียดยอดสูญหาย'].includes(menuTitle)) {
+                    icon = '<i class=\"fas fa-chart-bar\" style=\"margin-right: 6px;\"></i>';
+                } else if (['รายงานเคสทุจริต', 'ตารางเคสทุจริต', 'รายละเอียดเคสทุจริต'].includes(menuTitle)) {
+                    icon = '<i class=\"fas fa-exclamation-triangle\" style=\"margin-right: 6px;\"></i>';
+                } else if (menuTitle === 'ตารางงาน') {
+                    icon = '<i class=\"fas fa-calendar-alt\" style=\"margin-right: 6px;\"></i>';
+                }
+                title.innerHTML = icon + menuTitle;
+            }
+
+            if (
+                menuTitle === 'รายงานยอดสูญหาย' ||
+                menuTitle === 'รายงานเคสทุจริต' ||
+                menuTitle === 'ตารางงาน'
+            ) {
+                iframeContainer.classList.add('expanded-iframe');
+            } else {
+                iframeContainer.classList.remove('expanded-iframe');
             }
         }
     </script>
