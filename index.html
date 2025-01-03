@@ -4,61 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="icon" href="img/icon.ico" type="image/x-icon">
+    <link rel="icon" href="img/icon-black.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <div>
-                <div class="menu-header" style="margin-bottom: 10px;">
-                    <i class="fa-solid fa-layer-group" style="margin-right: 10px;"></i>Dashboards
-                </div>
-                <div class="menu-item" onclick="toggleMenu('loss-menu')">
-                    <span><i class="fas fa-chart-bar" style="margin-right: 5px;"></i> ยอดสูญหาย</span>
-                    <i class="fas fa-angle-down"></i>
-                </div>
-                <div class="submenu" id="loss-menu">
-                    <div class="submenu-item" onclick="changeIframeSrc('https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=1435556747', 'รายงานยอดสูญหาย')">รายงานยอดสูญหาย</div>
-                    <div class="submenu-item" onclick="changeIframeSrc('https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=2026076704', 'ตารางยอดสูญหาย')">ตารางยอดสูญหาย</div>
-                    <div class="submenu-item" onclick="changeIframeSrc('https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=794424016', 'รายละเอียดยอดสูญหาย')">รายละเอียดยอดสูญหาย</div>
-                </div>
-
-                <div class="menu-item" onclick="toggleMenu('fraud-menu')">
-                    <span><i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i> เคสทุจริต</span>
-                    <i class="fas fa-angle-down"></i>
-                </div>
-                <div class="submenu" id="fraud-menu">
-                    <div class="submenu-item" onclick="changeIframeSrc('https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=2016238972', 'รายงานเคสทุจริต')">รายงานเคสทุจริต</div>
-                    <div class="submenu-item" onclick="changeIframeSrc('https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=323050600', 'ตารางเคสทุจริต')">ตารางเคสทุจริต</div>
-                    <div class="submenu-item" onclick="changeIframeSrc('https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=1889868037', 'รายละเอียดเคสทุจริต')">รายละเอียดเคสทุจริต</div>
-                </div>
-
-                <div class="menu-item" onclick="changeIframeSrc('https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=9927042', 'ตารางงาน')">
-                    <span><i class="fas fa-calendar-alt" style="margin-right: 5px;"></i> ตารางงาน</span>
-                </div>
-            </div>
-            <div class="sidebar-footer">
-                <img src="img/lowcode.svg" alt="powered by lowcode" style="height: 12px;">
-            </div>
-        </div>
-
-        <div class="content">
-            <div class="header">
-                <div class="menu-title"><i class="fas fa-chart-bar" style="margin-right: 6px;"></i>รายงานยอดสูญหาย</div>
-                <div class="logo-container">
-                    <div style="font-size: 0.5rem; color: #888;">powered by</div>
-                    <img src="img/google_sheets_logo.svg" alt="Google Sheets Logo" class="logo">
-                </div>                
-            </div>
-            <div class="iframe-container">
-                <iframe id="iframe-content" src="https://docs.google.com/spreadsheets/d/1ea57VM8-W79BSIGw884niNYDiIQwptzoSwOuXhWLGsM/edit?rm=minimal&gridlines=0#gid=1435556747"></iframe>
-            </div>
-        </div>
-    </div>
-
+    <!-- เนื้อหาเดิม -->
     <script>
         function toggleMenu(menuId) {
             const submenu = document.getElementById(menuId);
@@ -97,6 +49,20 @@
                 iframeContainer.classList.remove('expanded-iframe');
             }
         }
+
+        function updateFavicon() {
+            const favicon = document.querySelector("link[rel='icon']");
+            const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+            // เปลี่ยนไอคอนตามโหมด
+            favicon.href = prefersDarkScheme ? "img/icon-white.ico" : "img/icon-black.ico";
+        }
+
+        // เรียกใช้ฟังก์ชันเมื่อโหลดหน้า
+        updateFavicon();
+
+        // ตรวจจับการเปลี่ยนโหมดสีแบบเรียลไทม์
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateFavicon);
     </script>
 </body>
 </html>
