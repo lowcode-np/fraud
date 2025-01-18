@@ -164,9 +164,3 @@ iframe {
     font-size: 1.5em;
     font-weight: bold;
 }
-
-.iframe-container iframe {
-    width: 100%;
-    height: calc(100% - 50px);
-    border: none;
-}
